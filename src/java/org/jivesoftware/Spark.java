@@ -468,7 +468,7 @@ public final class Spark {
      * Sets Spark specific colors
      */
     public static void installBaseUIProperties() {
-    	setApplicationFont(new Font("Dialog", Font.PLAIN, 11));
+    	setApplicationFont(new Font("Dialog", Font.PLAIN, 12));
         UIManager.put("ContactItem.border", BorderFactory.createLineBorder(Color.white));
         //UIManager.put("TextField.font", new Font("Dialog", Font.PLAIN, 11));
         //UIManager.put("Label.font", new Font("Dialog", Font.PLAIN, 11));
