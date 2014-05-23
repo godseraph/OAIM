@@ -17,9 +17,7 @@ public class OrgTreePlugin implements Plugin{
     public static ImageIcon    getOrganIcon(){//»ú¹¹Í¼±ê
         if(organ_icon==null){
             ClassLoader  cl=OrgTreePlugin.class.getClassLoader();
-            System.out.println(System.getProperty("user.dir" ));
             URL   imageURL=cl.getResource("images/organ.gif");
-            System.out.println("imagepath:"+imageURL.getPath());
             organ_icon=new   ImageIcon(imageURL);
         }
         return  organ_icon;
