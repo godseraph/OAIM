@@ -3,8 +3,10 @@ package com.advoa.spark.plugin;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.net.URL;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -18,6 +20,16 @@ import org.jivesoftware.spark.plugin.Plugin;
 
 public class AboutPlugin implements Plugin {
 
+	private static ImageIcon  plugin_icon=null;        
+	public static ImageIcon    getPluginIcon(){
+		//插件图标
+		if(plugin_icon==null){            
+			ClassLoader  cl=AboutPlugin.class.getClassLoader();            
+			URL   imageURL=cl.getResource("images/icon.gif");            
+			plugin_icon=new   ImageIcon(imageURL);        
+		}        
+		return  plugin_icon;    
+	}
 	@Override
 	public void initialize() {
 		//插件初始化
@@ -40,22 +52,7 @@ public class AboutPlugin implements Plugin {
 			e.printStackTrace();
 		}
 		// Add own Tab.
-		tabbedPane.addTab("介绍", new Icon() {
-			 @ Override
-			public void paintIcon(Component c, Graphics g, int x, int y) {
-				// TODO Auto-generated method stub
-			}
-			 @ Override
-			public int getIconWidth() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			 @ Override
-			public int getIconHeight() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-		}, textPane);
+		tabbedPane.addTab("介绍", getPluginIcon(), textPane);
 	}
 
 	@Override
