@@ -1,0 +1,12 @@
+<!-- Define your plugin -->
+<plugin>    
+<name>About Plugin</name>
+<version>1.0</version>    
+<author>Godseraph</author>    
+<homePage></homePage>    
+<email>wangjch@sina.co</email>    
+<description></description>    
+<class>com.advoa.spark.plugin.AboutPlugin</class>    
+<minSparkVersion>1.7.0</minSparkVersion>
+<java>1.7.0</java>
+</plugin>
