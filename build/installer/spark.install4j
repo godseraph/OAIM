@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.11" transformSequenceNumber="4">
   <directoryPresets config="../../target/build/lib" />
-  <application name="${compiler:APP_NAME}" distributionSourceDir="" applicationId="3057-7228-2063-7466" mediaDir="../../../../.." mediaFilePattern="spark_${compiler:sys.version}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="${compiler:APP_SHORT_NAME}" publisher="${compiler:PUBLISHER}" publisherWeb="${compiler:PUBLISHER_URL}" version="${compiler:VERSION_MAJOR}.${compiler:VERSION_MINOR}.${compiler:VERSION_REVISION}" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="1.8" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
+  <application name="${compiler:APP_NAME}" distributionSourceDir="" applicationId="3057-7228-2063-7466" mediaDir="../../../../.." mediaFilePattern="oaim_${compiler:sys.version}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="${compiler:APP_SHORT_NAME}" publisher="${compiler:PUBLISHER}" publisherWeb="${compiler:PUBLISHER_URL}" version="${compiler:VERSION_MAJOR}.${compiler:VERSION_MINOR}.${compiler:VERSION_REVISION}" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.7" javaMaxVersion="1.8" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
-      <principalLanguage id="en" customLocalizationFile="" />
+      <principalLanguage id="zh_CN" customLocalizationFile="" />
       <additionalLanguages />
     </languages>
     <searchSequence>
@@ -12,14 +12,14 @@
       <envVar name="JDK_HOME" />
     </searchSequence>
     <variables>
-      <variable name="VERSION_MAJOR" value="2" description="" category="" />
-      <variable name="VERSION_MINOR" value="7" description="" category="" />
-      <variable name="VERSION_REVISION" value="0" description="" category="" />
-      <variable name="APP_NAME" value="Spark" description="" category="" />
-      <variable name="APP_SHORT_NAME" value="Spark" description="" category="" />
+      <variable name="VERSION_MAJOR" value="1" description="" category="" />
+      <variable name="VERSION_MINOR" value="0" description="" category="" />
+      <variable name="VERSION_REVISION" value="2" description="" category="" />
+      <variable name="APP_NAME" value="OAIM" description="" category="" />
+      <variable name="APP_SHORT_NAME" value="OAIM" description="" category="" />
       <variable name="PUBLISHER" value="Ignite Realtime" description="" category="" />
-      <variable name="PUBLISHER_URL" value="http://www.igniterealtime.org" description="" category="" />
-      <variable name="PRODUCT_NAME" value="Spark" description="" category="" />
+      <variable name="PUBLISHER_URL" value="" description="" category="" />
+      <variable name="PRODUCT_NAME" value="OAIM" description="" category="" />
       <variable name="FILE_PREFIX" value="" description="" category="" />
       <variable name="RELEASE_ROOT_PATH" value="../target/installer" description="" category="" />
       <variable name="VARIABLE" value="" description="" category="" />
@@ -45,8 +45,8 @@
   </files>
   <launchers>
     <launcher name="Spark" id="4" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="" icnsFile="../../src/resources/images/message.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
-      <executable name="Spark" type="1" iconSet="true" iconFile="../../src/resources/images/spark.ico" executableDir="." redirectStderr="true" stderrFile="logs/error.log" stderrMode="overwrite" redirectStdout="true" stdoutFile="logs/output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="communicator" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false">
-        <versionInfo include="true" fileVersion="${compiler:sys.version}" fileDescription="Spark" legalCopyright="Ignite Realtime" internalName="${compiler:PRODUCT_NAME}" productName="" />
+      <executable name="OAIM" type="1" iconSet="true" iconFile="../../src/resources/images/spark.ico" executableDir="." redirectStderr="true" stderrFile="logs/error.log" stderrMode="overwrite" redirectStdout="true" stdoutFile="logs/output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="communicator" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false">
+        <versionInfo include="true" fileVersion="${compiler:sys.version}" fileDescription="OAIM" legalCopyright="Ignite Realtime" internalName="${compiler:PRODUCT_NAME}" productName="" />
       </executable>
       <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="" java6SplashScreen="false">
         <text>
@@ -564,7 +564,7 @@
     </applications>
   </installerGui>
   <mediaSets>
-    <windows name="Windows" id="2" customizedId="" mediaFileName="" installDir="Spark" overridePrincipalLanguage="true" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-x86-1.7.0_51" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
+    <windows name="Windows" id="2" customizedId="" mediaFileName="" installDir="OAIM" overridePrincipalLanguage="true" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-x86-1.7.0_51" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
       <excludedLaunchers />
       <excludedBeans />
       <overriddenPrincipalLanguage id="zh_CN" customLocalizationFile="" />
@@ -600,7 +600,7 @@
         <customAttributes />
       </autoUpdate>
     </unixArchive>
-    <windows name="Windows NON-JRE" id="19" customizedId="" mediaFileName="spark_${compiler:sys.version}_online" installDir="Spark" overridePrincipalLanguage="true" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="" manualJREEntry="false" bundleType="2" jreURL="http://www.jivesoftware.org/updater/releases/windows-x86-1.7.0_51.tar.gz" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
+    <windows name="Windows NON-JRE" id="19" customizedId="" mediaFileName="spark_${compiler:sys.version}_online" installDir="OAIM" overridePrincipalLanguage="true" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="" manualJREEntry="false" bundleType="2" jreURL="http://www.jivesoftware.org/updater/releases/windows-x86-1.7.0_51.tar.gz" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
       <excludedLaunchers />
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
