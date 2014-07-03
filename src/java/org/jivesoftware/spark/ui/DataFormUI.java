@@ -19,6 +19,7 @@
  */ 
 package org.jivesoftware.spark.ui;
 
+import org.jivesoftware.resource.Res;
 import org.jivesoftware.smackx.Form;
 import org.jivesoftware.smackx.FormField;
 import org.jivesoftware.spark.component.CheckBoxList;
@@ -76,7 +77,7 @@ public class DataFormUI extends JPanel {
         while (fields.hasNext()) {
             FormField field = fields.next();
             String variable = field.getVariable();
-            String label = field.getLabel();
+            String label = Res.getSmackString(field.getLabel());
             String type = field.getType();
 
             Iterator<?> iter = field.getValues();
