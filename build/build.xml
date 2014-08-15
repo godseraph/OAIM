@@ -261,7 +261,7 @@
 		</copy>
 		<copy todir="${plugins}">
 			<fileset dir="${commercial.plugin.dir}">
-				<include name="oaim.jar"/>
+				<include name="orgtree.jar"/>
 			</fileset>
 		</copy>
 		<copy todir="${target.xtra}">

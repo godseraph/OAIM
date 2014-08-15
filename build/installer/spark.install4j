@@ -14,7 +14,7 @@
     <variables>
       <variable name="VERSION_MAJOR" value="1" description="" category="" />
       <variable name="VERSION_MINOR" value="0" description="" category="" />
-      <variable name="VERSION_REVISION" value="2" description="" category="" />
+      <variable name="VERSION_REVISION" value="4" description="" category="" />
       <variable name="APP_NAME" value="OAIM" description="" category="" />
       <variable name="APP_SHORT_NAME" value="OAIM" description="" category="" />
       <variable name="PUBLISHER" value="Ignite Realtime" description="" category="" />
@@ -44,7 +44,7 @@
     <components />
   </files>
   <launchers>
-    <launcher name="Spark" id="4" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="" icnsFile="../../src/resources/images/message.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
+    <launcher name="OAIM" id="4" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="" icnsFile="../../src/resources/images/message.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
       <executable name="OAIM" type="1" iconSet="true" iconFile="../../src/resources/images/spark.ico" executableDir="." redirectStderr="true" stderrFile="logs/error.log" stderrMode="overwrite" redirectStdout="true" stdoutFile="logs/output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="communicator" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false">
         <versionInfo include="true" fileVersion="${compiler:sys.version}" fileDescription="OAIM" legalCopyright="Ignite Realtime" internalName="${compiler:PRODUCT_NAME}" productName="" />
       </executable>
