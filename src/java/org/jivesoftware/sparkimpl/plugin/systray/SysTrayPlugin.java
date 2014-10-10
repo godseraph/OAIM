@@ -19,7 +19,8 @@
  */
 package org.jivesoftware.sparkimpl.plugin.systray;
 
-import java.awt.MouseInfo;
+import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.Window;
@@ -31,10 +32,13 @@ import java.awt.event.MouseListener;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import org.jivesoftware.Spark;
 import org.jivesoftware.resource.Default;
@@ -62,7 +66,25 @@ import org.jivesoftware.smackx.ChatStateListener;
 public class SysTrayPlugin implements Plugin, NativeHandler, ChatManagerListener, ChatStateListener {
 	private static String MESSAGE_COUNTER_REG_EXP = "\\[\\d+\\] ";
     private JPopupMenu popupMenu = new JPopupMenu();
+    private static JDialog dialog; 
+    static { 
+        dialog = new JDialog((Frame) null, "TrayDialog"); 
+        dialog.setUndecorated(true); 
+        dialog.setAlwaysOnTop(true); 
+    } 
+    
+    private static PopupMenuListener popupListener = new PopupMenuListener() { 
+        public void popupMenuWillBecomeVisible(PopupMenuEvent e) { 
+        } 
 
+        public void popupMenuWillBecomeInvisible(PopupMenuEvent e) { 
+            dialog.setVisible(false); 
+        } 
+
+        public void popupMenuCanceled(PopupMenuEvent e) { 
+            dialog.setVisible(false); 
+        } 
+    }; 
     private JMenuItem openMenu;
     private JMenuItem minimizeMenu;
     private JMenuItem exitMenu;
@@ -195,7 +217,8 @@ public class SysTrayPlugin implements Plugin, NativeHandler, ChatManagerListener
 	    });
 	    if (!Default.getBoolean("DISABLE_EXIT"))
 		popupMenu.add(exitMenu);
-
+	    popupMenu.addPopupMenuListener(popupListener); 
+	    
 	    /**
 	     * If connection closed set offline tray image
 	     */
@@ -283,21 +306,13 @@ public class SysTrayPlugin implements Plugin, NativeHandler, ChatManagerListener
 					if (popupMenu.isVisible()) {
 						popupMenu.setVisible(false);
 					} else {
-
-						double x = MouseInfo.getPointerInfo()
-								.getLocation().getX();
-						double y = MouseInfo.getPointerInfo()
-								.getLocation().getY();
-
-						if (Spark.isMac()) {
-							popupMenu.setLocation((int) x, (int) y);
-						} else {
-							popupMenu.setLocation(event.getX(),
-									event.getY());
-						}
-
-						popupMenu.setInvoker(popupMenu);
-						popupMenu.setVisible(true);
+						//解决了托盘菜单不能自动隐藏的问题
+						Dimension size = popupMenu.getPreferredSize(); 
+			            dialog.setLocation(event.getX(), event.getY() - size.height); 
+			            dialog.setVisible(true); 
+			            popupMenu.show(dialog.getContentPane(), 0, 0); 
+			            // popup works only for focused windows 
+			            dialog.toFront();
 					}
 				}
 			}
@@ -328,7 +343,7 @@ public class SysTrayPlugin implements Plugin, NativeHandler, ChatManagerListener
 
 		    @Override
 		    public void mouseReleased(MouseEvent event) {
-
+		    	
 		    }
 
 		});
