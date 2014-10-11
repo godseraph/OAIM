@@ -960,7 +960,7 @@ public class LocalPreferences {
 	}
 
 	public int getContactListFontSize() {
-		return getInt("contactListFontSize", 11);
+		return getInt("contactListFontSize", 12);
 	}
 
 	public void setContactListIconSize(int iconSize) {

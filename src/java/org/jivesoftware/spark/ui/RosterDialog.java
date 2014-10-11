@@ -689,7 +689,7 @@ public class RosterDialog implements ActionListener {
 
             JLabel label = new JLabel();
             label.setText(name);
-            label.setFont(new Font("Dialog", Font.PLAIN, 11));
+            label.setFont(new Font("Dialog", Font.PLAIN, 12));
             label.setHorizontalTextPosition(JLabel.CENTER);
 
             add(iconLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));

@@ -60,7 +60,7 @@ public class BookmarkItem extends JPanel {
         descriptionLabel = new JLabel();
 
 
-        descriptionLabel.setFont(new Font("Dialog", Font.PLAIN, 11));
+        descriptionLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
         descriptionLabel.setForeground((Color)UIManager.get("ContactItemDescription.foreground"));
         descriptionLabel.setHorizontalTextPosition(JLabel.LEFT);
         descriptionLabel.setHorizontalAlignment(JLabel.LEFT);

@@ -367,8 +367,8 @@ public class SparkTabbedPane extends JPanel {
     private class TabPanel extends JPanel {
 	private static final long serialVersionUID = -8249981130816404360L;
 	private final BorderLayout layout = new BorderLayout(5, 5);
-	private final Font defaultFontPlain = new Font("Dialog", Font.PLAIN, 11);
-	private final Font defaultFontBold = new Font("Dialog", Font.BOLD, 11);
+	private final Font defaultFontPlain = new Font("Dialog", Font.PLAIN, 12);
+	private final Font defaultFontBold = new Font("Dialog", Font.BOLD, 12);
 	private JLabel iconLabel;
 	private JLabel titleLabel;
 	private JLabel tabCloseButton = new JLabel(closeInactiveButtonIcon);

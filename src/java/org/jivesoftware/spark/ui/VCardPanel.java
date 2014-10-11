@@ -242,7 +242,7 @@ public class VCardPanel extends JPanel {
         String title = vcard.getField("TITLE");
         if (ModelUtil.hasLength(title)) {
             final JLabel titleLabel = new JLabel(title);
-            titleLabel.setFont(new Font("Dialog", Font.PLAIN, 11));
+            titleLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
             add(titleLabel, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(0, 7, 0, 0), 0, 0));
         }
 

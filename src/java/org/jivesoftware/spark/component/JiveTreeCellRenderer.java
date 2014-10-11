@@ -55,10 +55,10 @@ public class JiveTreeCellRenderer extends DefaultTreeCellRenderer {
         // Root Nodes are always bold
         JiveTreeNode node = (JiveTreeNode)value;
         if (node.getAllowsChildren()) {
-            setFont(new Font("Arial", Font.BOLD, 11));
+            setFont(new Font("Arial", Font.BOLD, 12));
         }
         else {
-            setFont(new Font("Arial", Font.PLAIN, 11));
+            setFont(new Font("Arial", Font.PLAIN, 12));
         }
 
 

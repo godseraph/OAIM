@@ -153,7 +153,7 @@ public class SparkToaster {
      */
     public SparkToaster() {
         // Set default font...
-        font = new Font("Dialog", Font.PLAIN, 11);
+        font = new Font("Dialog", Font.PLAIN, 12);
 
         // Border color
         borderColor = new Color(245, 153, 15);
@@ -656,7 +656,7 @@ public class SparkToaster {
         public TitleLabel(String text, final boolean showCloseIcon) {
             setLayout(new GridBagLayout());
             label = new JLabel(text);
-            label.setFont(new Font("Dialog", Font.BOLD, 11));
+            label.setFont(new Font("Dialog", Font.BOLD, 12));
             label.setHorizontalTextPosition(JLabel.LEFT);
             label.setHorizontalAlignment(JLabel.LEFT);
 
