@@ -263,11 +263,8 @@ public class UserSearchForm extends JPanel {
             cardLayout.show(cardPanel, service);
         }
 
-        SearchForm searchForm = serviceMap.get(service);
-        Form form = searchForm.getSearchForm();
-        String description = form.getInstructions(); //XXX maybe add a Spark String instead
         titlePanel.setTitle(Res.getString("title.person.search"));
-        titlePanel.setDescription(description);
+        titlePanel.setDescription(Res.getString("title.person.search.description"));
     }
 
 

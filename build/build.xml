@@ -33,7 +33,7 @@
 	<if>
         <contains string="${build.number}" substring="build.number"/>
         <then>
-            <property name="version.extra" value=""/>
+            <property name="version.extra" value="1.0.5"/>
         </then>
         <else>
             <property name="version.extra" value="${build.number}"/>
@@ -261,7 +261,7 @@
 		</copy>
 		<copy todir="${plugins}">
 			<fileset dir="${commercial.plugin.dir}">
-				<include name="*.jar"/>
+				<include name="orgtree.jar"/>
 			</fileset>
 		</copy>
 		<copy todir="${target.xtra}">

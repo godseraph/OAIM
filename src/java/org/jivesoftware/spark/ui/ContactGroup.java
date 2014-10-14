@@ -170,7 +170,7 @@ public class ContactGroup extends CollapsiblePane implements MouseListener {
             }
         });
 
-        noContacts.getNicknameLabel().setFont(new Font("Dialog", Font.PLAIN, 11));
+        noContacts.getNicknameLabel().setFont(new Font("Dialog", Font.PLAIN, 12));
         noContacts.getNicknameLabel().setForeground(Color.GRAY);
         model.addElement(noContacts);
 
@@ -363,7 +363,7 @@ public class ContactGroup extends CollapsiblePane implements MouseListener {
     }
 
 	protected void setOfflineGroupNameFont(ContactItem item) {
-		item.getNicknameLabel().setFont(new Font("Dialog", Font.PLAIN, 11));
+		item.getNicknameLabel().setFont(new Font("Dialog", Font.PLAIN, 12));
 		item.getNicknameLabel().setForeground(Color.GRAY);
 	}
 

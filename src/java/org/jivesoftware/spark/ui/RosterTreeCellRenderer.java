@@ -56,7 +56,7 @@ public class RosterTreeCellRenderer extends DefaultTreeCellRenderer {
         // Root Nodes are always bold
         RosterNode node = (RosterNode)value;
         if (node.isGroup()) {
-            setFont(new Font("Dialog", Font.BOLD, 11));
+            setFont(new Font("Dialog", Font.BOLD, 12));
             setText(node.getName() + " (" + node.getChildCount() + " online)");
             setForeground(new Color(64, 112, 196));
             setIcon(getCustomIcon());
@@ -70,12 +70,12 @@ public class RosterTreeCellRenderer extends DefaultTreeCellRenderer {
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         final JLabel label = new JLabel();
-        label.setFont(new Font("Arial", Font.PLAIN, 11));
+        label.setFont(new Font("Arial", Font.PLAIN, 12));
         label.setText(node.getName());
         panel.add(label);
 
         final JLabel descriptionLabel = new JLabel();
-        descriptionLabel.setFont(new Font("Dialog", Font.PLAIN, 11));
+        descriptionLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
         descriptionLabel.setForeground(new Color(178, 181, 182));
         descriptionLabel.setText(" - I'm just chilling.");
 

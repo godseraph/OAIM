@@ -59,7 +59,7 @@ public class ImageTitlePanel extends JPanel {
 
         titleLabel.setText(title);
 
-        titleLabel.setFont(new Font("Dialog", Font.BOLD, 11));
+        titleLabel.setFont(new Font("Dialog", Font.BOLD, 12));
     }
 
     /**
@@ -71,7 +71,7 @@ public class ImageTitlePanel extends JPanel {
         init();
 
      
-        titleLabel.setFont(new Font("Dialog", Font.BOLD, 11));
+        titleLabel.setFont(new Font("Dialog", Font.BOLD, 12));
     }
 
     public void paintComponent(Graphics g) {

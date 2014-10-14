@@ -70,7 +70,7 @@ public class CollapsibleTitlePane extends BaseCollapsibleTitlePane {
         setLayout(new GridBagLayout());
 
         titleColor = new Color(33, 93, 198);
-        Font titleFont = new Font("Dialog", Font.BOLD, 11);
+        Font titleFont = new Font("Dialog", Font.BOLD, 12);
 
         // Initialize color
         startColor = new Color(238,242,253);

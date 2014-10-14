@@ -1,6 +1,10 @@
 # Spark ignores
 /target
 
+# Dev ignores
+/src/plugins/orgtree/target/
+/src/plugins/orgtree/build/
+
 # Java ignores
 *.class
 hs_err_pid*

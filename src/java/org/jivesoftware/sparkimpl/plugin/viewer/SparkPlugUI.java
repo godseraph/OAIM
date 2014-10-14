@@ -71,7 +71,7 @@ public class SparkPlugUI extends JPanel {
         add(imageIcon, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 
         add(titleLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 0), 0, 0));
-        titleLabel.setFont(new Font("dialog", Font.BOLD, 11));
+        titleLabel.setFont(new Font("dialog", Font.BOLD, 12));
         titleLabel.setForeground(new Color(80, 93, 198));
 
         add(versionLabel, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 5, 5), 0, 0));

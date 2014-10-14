@@ -97,7 +97,7 @@ public class ConversationHistoryPlugin implements Plugin {
 
         final JPanel mainPanel = new JPanel(new BorderLayout());
         final JLabel titleLabel = new JLabel(Res.getString("label.recent.conversation"));
-        titleLabel.setFont(new Font("Dialog", Font.BOLD, 11));
+        titleLabel.setFont(new Font("Dialog", Font.BOLD, 12));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.add(contacts, BorderLayout.CENTER);

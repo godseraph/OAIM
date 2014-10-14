@@ -182,7 +182,7 @@ public class ConferenceRoomBrowser extends JPanel implements ActionListener,
 	Hauptpanel.add(pane_hiddenButtons, BorderLayout.EAST);
 	this.add(Hauptpanel, BorderLayout.NORTH);
         
-    labelFilter = new JLabel(SparkRes.getString(SparkRes.FILTER_LABEL));
+    labelFilter = new JLabel(Res.getString(SparkRes.FILTER_LABEL));
     txtFilter = new JTextField(20);       
     txtFilter.setMinimumSize(new Dimension(50,20));
         

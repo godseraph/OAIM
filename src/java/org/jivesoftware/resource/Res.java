@@ -70,4 +70,13 @@ public class Res {
     public static PropertyResourceBundle getBundle() {
         return prb;
     }
+    
+    public static String getSmackString(String label){
+    	if(label==null)	return label;
+    	String labelname = "label.smack."+label;
+		String i18nString=getString(labelname);
+    	if(i18nString==null||labelname.equals(i18nString))
+    		return label;
+    	return i18nString;
+    }
 }

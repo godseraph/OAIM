@@ -81,7 +81,7 @@ public final class TitlePanel extends JPanel {
             add(titleLabel, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 5, 5), 0, 0));
             setBackground(Color.white);
 
-            titleLabel.setFont(new Font("dialog", Font.BOLD, 11));
+            titleLabel.setFont(new Font("dialog", Font.BOLD, 12));
             descriptionLabel.setFont(new Font("dialog", 0, 10));
         }
         else {
