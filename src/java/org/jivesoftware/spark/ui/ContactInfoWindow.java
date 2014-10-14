@@ -125,7 +125,7 @@ public class ContactInfoWindow extends JPanel {
 		statusLabel.setBorder(null);
 		fullJIDLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
 		fullJIDLabel.setForeground(Color.gray);
-		titleLabel.setFont(new Font("Dialog", Font.PLAIN, 11));
+		titleLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
 		titleLabel.setForeground(Color.gray);
 
 

@@ -608,7 +608,7 @@ public class StatusBar extends JPanel implements VCardListener {
             add(iconLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
             add(statusLabel, new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 2, 0, 0), 0, 0));
 
-            statusLabel.setFont(new Font(Font.DIALOG, Font.PLAIN, 11));
+            statusLabel.setFont(new Font(Font.DIALOG, Font.PLAIN, 12));
             statusLabel.setIcon(SparkRes.getImageIcon(SparkRes.DOWN_ARROW_IMAGE));
             statusLabel.setHorizontalTextPosition(JLabel.LEFT);
 
