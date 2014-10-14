@@ -14,7 +14,7 @@
     <variables>
       <variable name="VERSION_MAJOR" value="1" description="" category="" />
       <variable name="VERSION_MINOR" value="0" description="" category="" />
-      <variable name="VERSION_REVISION" value="4" description="" category="" />
+      <variable name="VERSION_REVISION" value="5" description="" category="" />
       <variable name="APP_NAME" value="OAIM" description="" category="" />
       <variable name="APP_SHORT_NAME" value="OAIM" description="" category="" />
       <variable name="PUBLISHER" value="Ignite Realtime" description="" category="" />
@@ -348,7 +348,7 @@
                     <object class="com.install4j.runtime.beans.actions.desktop.CreateDesktopLinkAction">
                       <void property="file">
                         <object class="java.io.File">
-                          <string>Spark</string>
+                          <string>OAIM</string>
                         </object>
                       </void>
                       <void property="name">
