@@ -20,7 +20,7 @@ public class OAAlertTask extends java.util.TimerTask{
 		OAAlertToolTip tip = new OAAlertToolTip();
         tip.setToolTip(new ImageIcon("test.jpg"),"您有新的待办件！\r\n您有新的邮件！");
         ClassLoader cl = OAAlertPlugin.class.getClassLoader();
-        URL soundURL = cl.getResource("sounds/alert.au");
+        URL soundURL = cl.getResource("sounds/ps.au");
         SparkManager.getSoundManager().playClip(new File(soundURL.getFile()));
         
 	}  
