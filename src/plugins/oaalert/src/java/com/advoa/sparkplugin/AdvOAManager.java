@@ -37,7 +37,7 @@ import org.jivesoftware.spark.util.log.Log;
 
 public class AdvOAManager {
 	private static AdvOAManager instance = null;
-	private AdvOAPreference preferences;
+	private AdvOAPreference preference;
 
 	public static AdvOAManager getInstance() {
 		if (instance == null) {
@@ -50,12 +50,12 @@ public class AdvOAManager {
 	private AdvOAManager() {
 
 		try {
-			preferences = new AdvOAPreference();
+			preference = new AdvOAPreference();
 
 			String language = SparkManager.getMainWindow().getLocale()
 					.getLanguage();
-			if (preferences.getPreferences().getSpellLanguage() != null) {
-				language = preferences.getPreferences().getSpellLanguage();
+			if (preference.getPreferences().getSpellLanguage() != null) {
+				language = preference.getPreferences().getSpellLanguage();
 			}
 
 		} catch (Exception e) {
@@ -65,7 +65,7 @@ public class AdvOAManager {
 	}
 
 	public AdvOAPreference getAdvOAPreference() {
-		return preferences;
+		return preference;
 	}
 
 }

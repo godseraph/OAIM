@@ -25,6 +25,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
+import org.jivesoftware.spark.SparkManager;
 import org.jivesoftware.spark.preference.Preference;
 
 /**
@@ -33,20 +34,21 @@ import org.jivesoftware.spark.preference.Preference;
 public class AdvOAPreference implements Preference {
 	public static String NAMESPACE = "AdvOA";
 	private AdvOAPreferenceDialog dialog;
+	private AdvOAPreferenceDialogTest dialogTest;
 	private AdvOAPreferences preferences;
+	private OAAlertPlugin alert;
 
 	public AdvOAPreference() {
 		preferences = new AdvOAPreferences();
 		try {
 			if (EventQueue.isDispatchThread()) {
-				dialog = new AdvOAPreferenceDialog();
+				dialogTest = new AdvOAPreferenceDialogTest();
 			} else {
 				EventQueue.invokeAndWait(new Runnable() {
 
 					@Override
 					public void run() {
-						dialog = new AdvOAPreferenceDialog();
-
+						dialogTest = new AdvOAPreferenceDialogTest();						
 					}
 				});
 			}
@@ -66,12 +68,34 @@ public class AdvOAPreference implements Preference {
 	}
 
 	public void commit() {
-		preferences.setSpellCheckerEnabled(dialog.isSpellCheckingEnabled());
-		preferences.setIgnoreUppercase(dialog.getIgnoreUppercase());
-		preferences.setLanguageSelectionInChatRoom(dialog
-				.getEnableLanuageSelection());
+		//boolean alertFlag = preferences.getBubbleSelection();
+		preferences.setSpellCheckerEnabled(dialogTest.isSpellCheckingEnabled());//ÊÇ·ñ¿ªÆô
+		preferences.setBubbleSelection(dialogTest.getBubbleSelection());//ÆøÅÝ
+		preferences.setSoundSelectionInChatRoom(dialogTest
+				.getSoundSelection());//ÉùÒô
+		preferences.setUserName(dialogTest.getUserName());
+		preferences.setPassword(dialogTest.getPassword());
 		//AdvOAManager.getInstance().loadDictionary(dialog.getSelectedLanguage());
 		preferences.save();
+//		if(dialogTest.getBubbleSelection()){
+//			alert = new OAAlertPlugin();
+//			alert.initialize();
+//		}
+//		if(!dialogTest.getSoundSelection()){
+//			if(preferences.getSoundSelectionInChatRoom())
+//				try {
+//					SparkManager.getSoundManager().wait();
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//		}else{
+//			if(!preferences.getSoundSelectionInChatRoom()){
+//				SparkManager.getSoundManager().notify();
+//			}
+//			
+//		}
+		
 	}
 
 	public Object getData() {
@@ -83,7 +107,7 @@ public class AdvOAPreference implements Preference {
 	}
 
 	public JComponent getGUI() {
-		return dialog;
+		return dialogTest;
 	}
 
 	public Icon getIcon() {
@@ -112,9 +136,10 @@ public class AdvOAPreference implements Preference {
 	}
 
 	public void load() {
-		dialog.setSpellCheckingEnabled(preferences.isSpellCheckerEnabled());
-		dialog.setEnableLanuageSelection(preferences
-				.getLanguageSelectionInChatRoom());
+		dialogTest.setSpellCheckingEnabled(preferences.isSpellCheckerEnabled());
+		dialogTest.setSoundSelection(preferences
+				.getSoundSelectionInChatRoom());
+		dialogTest.setBubbleSelection(preferences.getBubbleSelection());
 	}
 
 	public void shutdown() {

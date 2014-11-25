@@ -75,7 +75,8 @@ public class OAAlertToolTip {
             JWindow.class.getMethod("setAlwaysOnTop",
                     new Class[] { Boolean.class });
         } catch (Exception e) {
-            _useTop = false;
+            //_useTop = false;
+        	//e.printStackTrace();
         }
 
     }

@@ -29,87 +29,114 @@ import java.util.Properties;
 import org.jivesoftware.Spark;
 
 public class AdvOAPreferences {
-    private Properties props;
-    private File configFile;
+	private Properties props;
+	private File configFile;
 
-    public AdvOAPreferences() {
-	this.props = new Properties();
+	public AdvOAPreferences() {
+		this.props = new Properties();
 
-	try {
-	    props.load(new FileInputStream(getConfigFile()));
-	} catch (IOException e) {
-	    // Can't load ConfigFile
+		try {
+			props.load(new FileInputStream(getConfigFile()));
+		} catch (IOException e) {
+			// Can't load ConfigFile
+		}
+
 	}
 
-    }
+	public File getConfigFile() {
+		if (configFile == null)
+			configFile = new File(Spark.getSparkUserHome(),
+					"spellchecking.properties");
 
-    public File getConfigFile() {
-	if (configFile == null)
-	    configFile = new File(Spark.getSparkUserHome(),
-		    "spellchecking.properties");
-
-	return configFile;
-    }
-
-    public void save() {
-	try {
-	    props.store(new FileOutputStream(getConfigFile()), "");
-	} catch (Exception e) {
-	    e.printStackTrace();
+		return configFile;
 	}
-    }
 
-    public void setSpellLanguage(String name) {
-	props.setProperty("selectedSpellLanguage", name);
-    }
+	public void save() {
+		try {
+			props.store(new FileOutputStream(getConfigFile()), "");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    public String getSpellLanguage() {
-	return props.getProperty("selectedSpellLanguage", Locale.getDefault()
-		.getLanguage());
-    }
+	// 设置状态
+	public void setStatus(boolean status) {
+		setBoolean("status", status);
+	}
 
-    public void setSpellCheckerEnabled(boolean enabled) {
-	setBoolean("spellCheckerEnabled", enabled);
-    }
+	// 获取状态信息
+	public boolean getStatus() {
+		return getBoolean("status", false);
+	}
 
-    public boolean isSpellCheckerEnabled() {
-	return getBoolean("spellCheckerEnabled", false);
-    }
+	// 保存用户名
+	public void setUserName(String userName) {
+		props.setProperty("username", userName);
+	}
 
-    public void setAutoSpellCheckerEnabled(boolean enabled) {
-	setBoolean("autoSpellCheckerEnabled", enabled);
-    }
+	public String getUserName() {
+		return props.getProperty("username");
+	}
 
-    public boolean isAutoSpellCheckerEnabled() {
-	return getBoolean("autoSpellCheckerEnabled", false);
-    }
-    
-    public boolean getLanguageSelectionInChatRoom()
-    {
-       return getBoolean("showLanguageSelectionInChatRoom", false);
-    }
+	// 保存密码
+	public void setPassword(String password) {
+		props.setProperty("password", password);
+	}
 
-    public void setLanguageSelectionInChatRoom(boolean value)
-    {
-       setBoolean("showLanguageSelectionInChatRoom", value);
-    }
-    
-    private boolean getBoolean(String property, boolean defaultValue) {
-	return Boolean.parseBoolean(props.getProperty(property,
-		Boolean.toString(defaultValue)));
-    }
+	public String getPassword() {
+		return props.getProperty("password");
+	}
 
-    private void setBoolean(String property, boolean value) {
-	props.setProperty(property, Boolean.toString(value));
-    }
-    
-    public boolean getIgnoreUppercase()
-    {
-	return getBoolean("ignoreUppercase", false);
-    }
-    
-    public void setIgnoreUppercase(boolean ignore)
-    {
-	setBoolean("ignoreUppercase",ignore);
-    }
+	public void setSpellLanguage(String name) {
+		props.setProperty("selectedSpellLanguage", name);
+	}
+
+	public String getSpellLanguage() {
+		return props.getProperty("selectedSpellLanguage", Locale.getDefault()
+				.getLanguage());
+	}
+	
+	//是否设置
+	public void setSpellCheckerEnabled(boolean enabled) {
+		setBoolean("spellCheckerEnabled", enabled);
+	}
+
+	public boolean isSpellCheckerEnabled() {
+		return getBoolean("spellCheckerEnabled", false);
+	}
+
+	public void setAutoSpellCheckerEnabled(boolean enabled) {
+		setBoolean("autoSpellCheckerEnabled", enabled);
+	}
+
+	public boolean isAutoSpellCheckerEnabled() {
+		return getBoolean("autoSpellCheckerEnabled", false);
+	}
+	
+	//设置声音
+	public boolean getSoundSelectionInChatRoom() {
+		return getBoolean("showSoundSelectionInChatRoom", false);
+	}
+
+	public void setSoundSelectionInChatRoom(boolean value) {
+		setBoolean("showSoundSelectionInChatRoom", value);
+	}
+
+	private boolean getBoolean(String property, boolean defaultValue) {
+		return Boolean.parseBoolean(props.getProperty(property,
+				Boolean.toString(defaultValue)));
+	}
+
+	private void setBoolean(String property, boolean value) {
+		props.setProperty(property, Boolean.toString(value));
+	}
+
+	public boolean getBubbleSelection() {
+		return getBoolean("BubbleSelection", false);
+	}
+
+	// 气泡
+	public void setBubbleSelection(boolean bubble) {
+		setBoolean("BubbleSelection", bubble);
+	}
 }
