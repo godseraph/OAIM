@@ -208,7 +208,7 @@ public class RosterDialog implements ActionListener {
         groupBox.setEditable(true);
 
         if (groupModel.size() == 0) {
-            groupBox.addItem("Friends");
+            groupBox.addItem("ÎÒµÄºÃÓÑ");
         }
 
         if (groupModel.size() > 0) {
