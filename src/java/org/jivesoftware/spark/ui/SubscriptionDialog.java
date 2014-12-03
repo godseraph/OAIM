@@ -154,7 +154,7 @@ public class SubscriptionDialog {
         groupBox.setEditable(true);
 
         if (groupBox.getItemCount() == 0) {
-            groupBox.addItem("Friends");
+            groupBox.addItem("ÎÒµÄºÃÓÑ");
         }
 
         if (groupBox.getItemCount() > 0) {
