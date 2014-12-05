@@ -1,26 +1,24 @@
 package com.advoa.sparkplugin;
 
-import java.awt.BorderLayout; 
 import java.awt.Color; 
 import java.awt.Font; 
 import java.awt.GraphicsEnvironment;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+
+
 import javax.swing.JTextArea;
 import javax.swing.JWindow;
-import javax.swing.border.EtchedBorder; 
+
 public class OAAlertToolTip {
 
     // 气泡提示宽
-    private int _width = 300;
+    private int _width = 220;
 
     // 气泡提示高
-    private int _height = 100;
+    private int _height = 140;
 
     // 设定循环的步长
     private int _step = 30;
@@ -29,7 +27,7 @@ public class OAAlertToolTip {
     private int _stepTime = 30;
 
     // 显示时间
-    private int _displayTime = 6000;
+    private int _displayTime = 20000;
 
     // 目前申请的气泡提示数量
     private int _countOfToolTip = 0;
@@ -64,21 +62,12 @@ public class OAAlertToolTip {
      */
     public OAAlertToolTip() {
         // 设定字体
-        _font = new Font("宋体", 0, 16);
+        _font = new Font("楷体", 0, 18);
         // 设定边框颜色
-        _bgColor = new Color(255, 255, 225);
-        _border = Color.BLACK;
-        _messageColor = Color.BLACK;
+        _bgColor = new Color(241, 241, 229);//
+        _border = Color.BLUE;
+        _messageColor = Color.BLUE;
         _useTop = true;
-        // 通过调用方法，强制获知是否支持自动窗体置顶
-        try {
-            JWindow.class.getMethod("setAlwaysOnTop",
-                    new Class[] { Boolean.class });
-        } catch (Exception e) {
-            //_useTop = false;
-        	//e.printStackTrace();
-        }
-
     }
 
     /**
@@ -88,8 +77,7 @@ public class OAAlertToolTip {
     class ToolTipSingle extends JWindow {
         private static final long serialVersionUID = 1L;
 
-        private JLabel _iconLabel = new JLabel();
-
+        
         private JTextArea _message = new JTextArea();
 
         public ToolTipSingle() {
@@ -99,25 +87,20 @@ public class OAAlertToolTip {
         private void initComponents() {
             setSize(_width, _height);
             _message.setFont(getMessageFont());
-            JPanel externalPanel = new JPanel(new BorderLayout(1, 1));
-            externalPanel.setBackground(_bgColor);
-            // 通过设定水平与垂直差值获得内部面板
-            JPanel innerPanel = new JPanel(new BorderLayout(getGap(), getGap()));
-            innerPanel.setBackground(_bgColor);
+            ImagePanel externalPanel = new ImagePanel();
+            externalPanel.setLayout(new GridBagLayout());            
+
+            externalPanel.add(_message, new GridBagConstraints(1, 1, 2, 2, 1.0,
+    				1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
+    				new Insets(55, 35, 15, 15), 20, 40));
+
             _message.setBackground(_bgColor);
-            _message.setMargin(new Insets(4, 4, 4, 4));
+
             _message.setLineWrap(true);
             _message.setWrapStyleWord(true);
-            // 创建具有指定高亮和阴影颜色的阴刻浮雕化边框
-            EtchedBorder etchedBorder = (EtchedBorder) BorderFactory
-                    .createEtchedBorder();
-            // 设定外部面板内容边框为风化效果
-            externalPanel.setBorder(etchedBorder);
-            // 加载内部面板
-            externalPanel.add(innerPanel);
+
             _message.setForeground(getMessageColor());
-            innerPanel.add(_iconLabel, BorderLayout.WEST);
-            innerPanel.add(_message, BorderLayout.CENTER);
+
             getContentPane().add(externalPanel);
         }
 
@@ -233,23 +216,12 @@ public class OAAlertToolTip {
      * @param icon
      * @param msg
      */
-    public void setToolTip(Icon icon, String msg) {
+    public void setToolTip( String msg) {
         ToolTipSingle single = new ToolTipSingle();
-        if (icon != null) {
-            single._iconLabel.setIcon(icon);
-        }
         single._message.setText(msg);
         single.animate();
     }
 
-    /**
-     * 设定显示的信息
-     *
-     * @param msg
-     */
-    public void setToolTip(String msg) {
-        setToolTip(null, msg);
-    }
 
     /**
      * 获得当前消息字体
@@ -390,11 +362,5 @@ public class OAAlertToolTip {
     public void setWidth(int width) {
         this._width = width;
     }
-
-    public static void main(String[] args) {
-
-        OAAlertToolTip tip = new OAAlertToolTip();
-        tip.setToolTip(new ImageIcon("test.jpg"),"test");
-   }
 
 }

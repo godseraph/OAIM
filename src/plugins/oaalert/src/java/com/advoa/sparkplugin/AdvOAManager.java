@@ -19,22 +19,6 @@
  */
 package com.advoa.sparkplugin;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.CodeSource;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-import java.util.zip.ZipFile;
-
-import org.dts.spell.SpellChecker;
-import org.dts.spell.dictionary.openoffice.OpenOfficeSpellDictionary;
-import org.dts.spell.dictionary.SpellDictionary;
-import org.jivesoftware.spark.SparkManager;
-import org.jivesoftware.spark.util.log.Log;
-
 public class AdvOAManager {
 	private static AdvOAManager instance = null;
 	private AdvOAPreference preference;
@@ -51,12 +35,7 @@ public class AdvOAManager {
 
 		try {
 			preference = new AdvOAPreference();
-
-			String language = SparkManager.getMainWindow().getLocale()
-					.getLanguage();
-			if (preference.getPreferences().getSpellLanguage() != null) {
-				language = preference.getPreferences().getSpellLanguage();
-			}
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
