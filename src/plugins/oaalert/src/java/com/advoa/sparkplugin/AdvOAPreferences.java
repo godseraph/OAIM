@@ -80,11 +80,15 @@ public class AdvOAPreferences {
 
 	// ±£¥Ê√‹¬Î
 	public void setPassword(String password) {
-		props.setProperty("password", password);
+		
+		Blowfish bf = new Blowfish("AudO6l0swyzXDnk");
+		if(!password.equals((props.getProperty("password"))))
+				props.setProperty("password", bf.encrypt(password));
 	}
 
 	public String getPassword() {
-		return props.getProperty("password");
+		Blowfish bf = new Blowfish("AudO6l0swyzXDnk");
+		return bf.decrypt(props.getProperty("password"));
 	}
 
 	public void setSpellLanguage(String name) {

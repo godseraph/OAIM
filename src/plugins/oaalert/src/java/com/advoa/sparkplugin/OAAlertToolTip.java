@@ -1,17 +1,27 @@
 package com.advoa.sparkplugin;
 
+import java.awt.BorderLayout; 
 import java.awt.Color; 
 import java.awt.Font; 
+import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
 
-
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JWindow;
-
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder; 
+import javax.swing.border.LineBorder;
 public class OAAlertToolTip {
 
     // 气泡提示宽
@@ -27,7 +37,7 @@ public class OAAlertToolTip {
     private int _stepTime = 30;
 
     // 显示时间
-    private int _displayTime = 20000;
+    private int _displayTime = 5000;
 
     // 目前申请的气泡提示数量
     private int _countOfToolTip = 0;
@@ -77,6 +87,7 @@ public class OAAlertToolTip {
     class ToolTipSingle extends JWindow {
         private static final long serialVersionUID = 1L;
 
+        private JLabel _label = new JLabel();
         
         private JTextArea _message = new JTextArea();
 

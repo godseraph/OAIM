@@ -262,6 +262,7 @@
 		<copy todir="${plugins}">
 			<fileset dir="${commercial.plugin.dir}">
 				<include name="orgtree.jar"/>
+				<include name="oaalert.jar"/>
 			</fileset>
 		</copy>
 		<copy todir="${target.xtra}">

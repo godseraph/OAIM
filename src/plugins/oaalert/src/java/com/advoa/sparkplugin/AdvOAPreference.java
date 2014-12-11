@@ -100,11 +100,11 @@ public class AdvOAPreference implements Preference {
 	}
 
 	public String getTitle() {
-		return "协同办公系统设置";
+		return "协同办公系统";
 	}
 
 	public String getTooltip() {
-		return "设置与协同办公系统的关联参数";
+		return "设置与OA关联的参数";
 	}
 
 	public boolean isDataValid() {

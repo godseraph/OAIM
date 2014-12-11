@@ -118,13 +118,14 @@ public class AdvOAPreferenceDialog extends JPanel implements
 		ResourceUtils.resButton(sound, "声音");
 
 		setLayout(new VerticalFlowLayout());
-		spellPanel.setBorder(BorderFactory.createTitledBorder("用户信息"));
+		spellPanel.setBorder(BorderFactory.createTitledBorder("基本信息"));
 		setPanel.setBorder(BorderFactory.createTitledBorder("提醒设置"));
 		add(spellPanel);
 		add(setPanel);
 	}
 
 	private File getConfigFile() {
+		// TODO Auto-generated method stub
 		if (configFile == null)
 			configFile = new File(Spark.getSparkUserHome(),
 					"spellchecking.properties");

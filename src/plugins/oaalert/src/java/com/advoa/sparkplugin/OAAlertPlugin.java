@@ -70,6 +70,7 @@ public class OAAlertPlugin implements Plugin {
 			timer.schedule(task, 1000, 1000 * 60 * alerttimer);
 			preferences.setStatus(true);
 		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 
