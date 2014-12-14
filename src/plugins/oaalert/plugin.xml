@@ -1,0 +1,11 @@
+<plugin>    
+<name>OAAlert Plugin</name>
+<version>1.0</version>    
+<author>Godseraph</author>    
+<homePage></homePage>    
+<email>wangjch@sina.com</email>    
+<description></description>    
+<class>com.advoa.sparkplugin.OAAlertPlugin</class>    
+<minSparkVersion>1.7.0</minSparkVersion>
+<java>1.7.0</java>
+</plugin>
