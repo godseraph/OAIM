@@ -1,8 +1,9 @@
 package com.advoa.sparkplugin;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.util.List;
+import sun.audio.*;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -17,14 +18,12 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-import org.jivesoftware.spark.SoundManager;
 import org.jivesoftware.spark.SparkManager;
 
 public class OAAlertTask extends java.util.TimerTask {
 
 	private static OAAlertPlugin plugin;
 	private static OAAlertTask instance;
-	private static SoundManager soundManager = SparkManager.getSoundManager();
 	private static AdvOAPreferences preferences;
 
 	private OAAlertTask(OAAlertPlugin oaAlertPlugin) {
@@ -66,13 +65,13 @@ public class OAAlertTask extends java.util.TimerTask {
 		if (soundSelectionInChatRoom){
 			boolean gwau = getXML(xmlStr, "gwau").equals("no");
 			if(!gwau && gwalert){
-				soundManager.playClip(new File(cl.getResource(
-						"sounds/"+getXML(xmlStr, "gwau")).getFile()));
+				AudioPlayer.player.start(cl.getResourceAsStream(
+						"sounds/"+getXML(xmlStr, "gwau")));
 			}
 			boolean mailau = getXML(xmlStr, "mailau").equals("no");
 			if(!mailau && mailalert){
-				soundManager.playClip(new File(cl.getResource(
-						"sounds/"+getXML(xmlStr, "mailau")).getFile()));
+				AudioPlayer.player.start(cl.getResourceAsStream(
+						"sounds/"+getXML(xmlStr, "mailau")));
 			}
 			
 		}
