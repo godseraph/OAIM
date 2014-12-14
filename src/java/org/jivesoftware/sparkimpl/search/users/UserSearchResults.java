@@ -61,7 +61,7 @@ import java.util.List;
 public class UserSearchResults extends JPanel {
 
     private static final long serialVersionUID = 4196389090818949068L;
-    private UsersInfoTable resultsTable;
+    private UsersInfoTable resultsTable;    
 
     /**
      * Intiliaze the Search Service Results UI.
@@ -76,16 +76,27 @@ public class UserSearchResults extends JPanel {
      * @param data the <code>ReportedData</code> returned by the Search Service.
      */
     public void showUsersFound(ReportedData data) {
+        List<String> columnName = new ArrayList<String>();
         List<String> columnList = new ArrayList<String>();
         Iterator<Column> columns = data.getColumns();
         while (columns.hasNext()) {
             Column column = columns.next();
             String label = column.getLabel();
             columnList.add(label);
+            if(label.equals("JID")){
+            	columnName.add("标识");
+            }else if(label.equals("Username")){
+            	columnName.add("用户名");
+            }else if(label.equals("Name")){
+            	columnName.add("名称");
+            }else if(label.equals("Email")){
+            	columnName.add("邮件地址");
+            }
+            
         }
 
         if (resultsTable == null) {
-            resultsTable = new UsersInfoTable(columnList.toArray(new String[columnList.size()]));
+            resultsTable = new UsersInfoTable(columnName.toArray(new String[columnName.size()]));
 
             final JScrollPane scrollPane = new JScrollPane(resultsTable);
             scrollPane.getViewport().setBackground(Color.white);
@@ -119,7 +130,7 @@ public class UserSearchResults extends JPanel {
             modelList = new ArrayList<String>();
             Row row = rows.next();
             for (int i = 0; i < resultsTable.getColumnCount(); i++) {
-                String tableValue = (String)resultsTable.getTableHeader().getColumnModel().getColumn(i).getHeaderValue();
+                String tableValue = columnList.get(i);//(String)resultsTable.getTableHeader().getColumnModel().getColumn(i).getHeaderValue();
                 Iterator<Column> columnIterator = data.getColumns();
                 while (columnIterator.hasNext()) {
                     Column column = columnIterator.next();
