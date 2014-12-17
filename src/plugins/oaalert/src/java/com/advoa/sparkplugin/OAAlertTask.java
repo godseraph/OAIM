@@ -1,8 +1,11 @@
 package com.advoa.sparkplugin;
 
-
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import sun.audio.*;
 
 import org.apache.http.HttpEntity;
@@ -18,16 +21,30 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.jivesoftware.spark.SoundManager;
 import org.jivesoftware.spark.SparkManager;
 
 public class OAAlertTask extends java.util.TimerTask {
 
 	private static OAAlertPlugin plugin;
 	private static OAAlertTask instance;
+	private static SoundManager soundManager = SparkManager.getSoundManager();
 	private static AdvOAPreferences preferences;
-
+	private Map<String,String> soundMap = new HashMap<String,String>();
+	
+	
 	private OAAlertTask(OAAlertPlugin oaAlertPlugin) {
 		plugin = oaAlertPlugin;
+		soundMap.put("短促音", "sound0.au");
+		soundMap.put("鸟鸣", "sound1.au");
+		soundMap.put("门铃", "sound2.au");
+		soundMap.put("击打", "sound4.au");
+		soundMap.put("深海探测", "sound5.au");
+		soundMap.put("招呼", "sound6.au");
+		soundMap.put("风琴", "sound7.au");
+		soundMap.put("短鸣", "sound8.au");
+		soundMap.put("蜂鸣", "sound9.au");
+		soundMap.put("静音", "no");
 	}
 
 	public static synchronized OAAlertTask getInstance(OAAlertPlugin plugin) {
@@ -39,6 +56,7 @@ public class OAAlertTask extends java.util.TimerTask {
 
 	@Override
 	public void run() {
+		
 		OAAlertToolTip tip = new OAAlertToolTip();
 		ClassLoader cl = OAAlertPlugin.class.getClassLoader();
 		preferences = new AdvOAPreferences();
@@ -49,31 +67,28 @@ public class OAAlertTask extends java.util.TimerTask {
 		boolean gwalert = getXML(xmlStr, "gwalert").equals("True");
 		boolean soundSelectionInChatRoom = preferences
 				.getSoundSelectionInChatRoom();
-		if (preferences.getBubbleSelection()) {
-			if (mailalert && !gwalert) {
-				str = "您有新邮件待阅！";
-				tip.setToolTip(str);
-			} else if (gwalert && !mailalert) {
-				str = "您有新的公文待办！";
-				tip.setToolTip(str);
-			} else if (mailalert && gwalert) {
-				str = "您有新邮件待阅！\r\n您有新的公文待办！";
-				tip.setToolTip(str);
-			}
-			
+		if (mailalert && !gwalert) {
+			str = "  您有新邮件待阅！";
+			tip.setToolTip(str);
+		} else if (gwalert && !mailalert) {
+			str = "  您有新的公文待办！";
+			tip.setToolTip(str);
+		} else if (mailalert && gwalert) {
+			str = "  您有新邮件待阅！\n  您有新的公文待办！";
+			tip.setToolTip(str);
 		}
-		if (soundSelectionInChatRoom){
-			boolean gwau = getXML(xmlStr, "gwau").equals("no");
-			if(!gwau && gwalert){
-				AudioPlayer.player.start(cl.getResourceAsStream(
-						"sounds/"+getXML(xmlStr, "gwau")));
+		if (soundSelectionInChatRoom) {
+			String gw_au = soundMap.get(preferences.getGwSoundSelection());
+			if (!gw_au.equals("no") && gwalert) {
+				AudioPlayer.player.start(cl.getResourceAsStream("sounds/"
+						+ gw_au));
 			}
-			boolean mailau = getXML(xmlStr, "mailau").equals("no");
-			if(!mailau && mailalert){
-				AudioPlayer.player.start(cl.getResourceAsStream(
-						"sounds/"+getXML(xmlStr, "mailau")));
+			String mail_au = soundMap.get(preferences.getMailSoundSelection());
+			if (!mail_au.equals("no") && mailalert) {
+				AudioPlayer.player.start(cl.getResourceAsStream("sounds/"
+						+ mail_au));
 			}
-			
+
 		}
 	}
 
@@ -92,30 +107,14 @@ public class OAAlertTask extends java.util.TimerTask {
 		return null;
 	}
 
-	//通过xml获取url
+	// 通过xml获取url
 	public String getURIName() {
-		String uriName = null;
-		String h = "http://"; // uriName的网页表头
-		String openfireIP = null; // openfire的IP地址
-		String fileName = ":9090/oapluginconfig.xml";
-		String xmlURL = null;
-		SAXReader URIsaxReader = new SAXReader();
-		try {	
-
-			openfireIP = SparkManager.getConnection().getHost();
-			uriName = h + openfireIP + fileName;
-			Document document = URIsaxReader.read(uriName);
-			//Node node = document.selectSingleNode("//root/oaalert/oaurl");
-			List<? extends Node> list = document.selectNodes("//root/oaalert/oaurl");
-			for (Node node : list) {
-				xmlURL=node.getText();
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return xmlURL;
+		XmlUtil util = new XmlUtil();
+		return util.getXMLText(util.getList("//root/oaalert/servers/oaserver"),
+				preferences.getServerSelection());
 	}
-	//处理url
+
+	// 处理url
 	public String getRealURL(String xmlURL) {
 		String[] urls = xmlURL.split("#");
 		String realurl = "";
@@ -130,7 +129,7 @@ public class OAAlertTask extends java.util.TimerTask {
 		return realurl;
 	}
 
-	//获取重定向结果
+	// 获取重定向结果
 	public String get(String username, String password) {
 		String xmlStr = getRealURL(getURIName());
 		CloseableHttpClient httpclient = HttpClients.createDefault();

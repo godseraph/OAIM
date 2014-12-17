@@ -134,7 +134,51 @@ public class AdvOAPreferences {
 	private void setBoolean(String property, boolean value) {
 		props.setProperty(property, Boolean.toString(value));
 	}
-
+	
+	private void setString(String property, String value){
+		props.setProperty(property,value);
+	}
+	private String getString(String key){
+		return props.getProperty(key,"");
+	}
+	
+	public void setServerSelection(String value){
+		setString("Server", value);
+	}
+	
+	public String getServerSelection(){
+		return getString("Server");
+	}
+	
+	public void setLoginSelection(String value){
+		setString("Login",value);
+	}
+	
+	public String getLoginSelection(){
+		return getString("Login");
+	}
+	public void setMailSoundSelection(String value){
+		setString("MailSound",value);
+	}
+	public String getMailSoundSelection(){
+		return getString("MailSound");
+	}
+	
+	public void setGwSoundSelection(String value){
+		setString("GwSound", value);
+	}
+	
+	public String getGwSoundSelection(){
+		return getString("GwSound");
+	}
+	
+	public void setButtonCheck(boolean show){
+		setBoolean("ButtonCheck", show);
+	}
+	public boolean getButtonCheck(){
+		return getBoolean("ButtonCheck", true);
+	}
+	
 	public boolean getBubbleSelection() {
 		return getBoolean("BubbleSelection", false);
 	}

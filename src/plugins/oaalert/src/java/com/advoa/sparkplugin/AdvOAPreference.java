@@ -64,7 +64,11 @@ public class AdvOAPreference implements Preference {
 	}
 
 	public void commit() {
-		preferences.setSpellCheckerEnabled(dialog.isSpellCheckingEnabled());//ÊÇ·ñ¿ªÆô
+		preferences.setButtonCheck(dialog.getButtonCheck());
+		preferences.setServerSelection(dialog.getServer());
+		preferences.setLoginSelection(dialog.getLogin());
+		preferences.setMailSoundSelection(dialog.getMailSound());
+		preferences.setGwSoundSelection(dialog.getGwSound());
 		preferences.setBubbleSelection(dialog.getBubbleSelection());//ÆøÅÝ
 		preferences.setSoundSelectionInChatRoom(dialog.getSoundSelection());//ÉùÒô
 		preferences.setStatus(dialog.getBubbleSelection());
@@ -112,9 +116,13 @@ public class AdvOAPreference implements Preference {
 	}
 
 	public void load() {
-		dialog.setSpellCheckingEnabled(preferences.isSpellCheckerEnabled());
 		dialog.setSoundSelection(preferences.getSoundSelectionInChatRoom());
 		dialog.setBubbleSelection(preferences.getBubbleSelection());
+		dialog.setServer(preferences.getServerSelection());
+		dialog.setLogin(preferences.getLoginSelection());
+		dialog.setMailSound(preferences.getMailSoundSelection());
+		dialog.setGwSound(preferences.getGwSoundSelection());
+		dialog.setButtonCheck(preferences.getButtonCheck());
 	}
 
 	public void shutdown() {
