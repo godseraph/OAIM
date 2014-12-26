@@ -1,9 +1,7 @@
 package com.advoa.sparkplugin;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import sun.audio.*;
@@ -19,8 +17,6 @@ import org.apache.http.util.EntityUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
-import org.dom4j.Node;
-import org.dom4j.io.SAXReader;
 import org.jivesoftware.spark.SoundManager;
 import org.jivesoftware.spark.SparkManager;
 
@@ -30,9 +26,8 @@ public class OAAlertTask extends java.util.TimerTask {
 	private static OAAlertTask instance;
 	private static SoundManager soundManager = SparkManager.getSoundManager();
 	private static AdvOAPreferences preferences;
-	private Map<String,String> soundMap = new HashMap<String,String>();
-	
-	
+	private Map<String, String> soundMap = new HashMap<String, String>();
+
 	private OAAlertTask(OAAlertPlugin oaAlertPlugin) {
 		plugin = oaAlertPlugin;
 		soundMap.put("短促音", "sound0.au");
@@ -56,7 +51,7 @@ public class OAAlertTask extends java.util.TimerTask {
 
 	@Override
 	public void run() {
-		
+
 		OAAlertToolTip tip = new OAAlertToolTip();
 		ClassLoader cl = OAAlertPlugin.class.getClassLoader();
 		preferences = new AdvOAPreferences();
@@ -65,17 +60,20 @@ public class OAAlertTask extends java.util.TimerTask {
 				preferences.getPassword());
 		boolean mailalert = getXML(xmlStr, "mailalert").equals("True");
 		boolean gwalert = getXML(xmlStr, "gwalert").equals("True");
+		boolean bubbleSelection = preferences.getBubbleSelection();
 		boolean soundSelectionInChatRoom = preferences
 				.getSoundSelectionInChatRoom();
-		if (mailalert && !gwalert) {
-			str = "  您有新邮件待阅！";
-			tip.setToolTip(str);
-		} else if (gwalert && !mailalert) {
-			str = "  您有新的公文待办！";
-			tip.setToolTip(str);
-		} else if (mailalert && gwalert) {
-			str = "  您有新邮件待阅！\n  您有新的公文待办！";
-			tip.setToolTip(str);
+		if (bubbleSelection) {
+			if (mailalert && !gwalert) {
+				str = "   您有新邮件待阅！";
+				tip.setToolTip(str);
+			} else if (gwalert && !mailalert) {
+				str = "   您有新的公文待办！";
+				tip.setToolTip(str);
+			} else if (mailalert && gwalert) {
+				str = "   您有新邮件待阅！\n   您有新的公文待办！";
+				tip.setToolTip(str);
+			}
 		}
 		if (soundSelectionInChatRoom) {
 			String gw_au = soundMap.get(preferences.getGwSoundSelection());

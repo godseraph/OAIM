@@ -14,6 +14,23 @@ import org.jivesoftware.spark.SparkManager;
 
 public class XmlUtil {
 
+	private String uriName = null;
+	private String h = "http://"; // uriName的网页表头
+	private String openfireIP = null; // openfire的IP地址
+	private String fileName = ":9090/oapluginconfig.xml";
+	private Document document;
+	
+	public XmlUtil(){
+		SAXReader URIsaxReader = new SAXReader();
+		openfireIP = SparkManager.getConnection().getHost();
+		uriName = h + openfireIP + fileName;
+		try {
+			document = URIsaxReader.read(uriName);
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	// 获取属性
 	public String getXML(String xmlStr, String attribute) {
 		Document document;
@@ -31,21 +48,7 @@ public class XmlUtil {
 	//
 	public List<? extends Node> getList(String path) {
 		List<? extends Node> list = null;
-		String uriName = null;
-		String h = "http://"; // uriName的网页表头
-		String openfireIP = null; // openfire的IP地址
-		String fileName = ":9090/oapluginconfig.xml";
-		SAXReader URIsaxReader = new SAXReader();
-		openfireIP = SparkManager.getConnection().getHost();
-		uriName = h + openfireIP + fileName;
-		try {
-			Document document = URIsaxReader.read(uriName);
-			list = document.selectNodes(path);
-			return list;
-		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		list = document.selectNodes(path);
 		return list;
 	}
 
