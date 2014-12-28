@@ -8,6 +8,10 @@ import java.awt.*;
 import javax.swing.tree.*;
 import javax.swing.event.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,6 +21,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.spark.SparkManager;
 
 //组织机构树
@@ -66,14 +71,34 @@ public class OrgTree extends JPanel implements TreeModelListener,
 		tree1.setRootVisible(true);
 		tree1.putClientProperty("JTree.lineStyle", "Angle");
 		tree1.addMouseListener(new MouseHandle());
+		
 		treeModel = (DefaultTreeModel) tree1.getModel();
 		treeModel.addTreeModelListener(this);
 		tree1.setVisible(true);
-		DefaultTreeCellRenderer render = (DefaultTreeCellRenderer) tree1
-				.getCellRenderer();
+		
+//		DefaultTreeCellRenderer render = (DefaultTreeCellRenderer) tree1
+//				.getCellRenderer();
+		final OrgTreeCellRenderer render = new OrgTreeCellRenderer();
+		//render.setDisabledIcon();
 		render.setLeafIcon(OrgTreePlugin.getUserIcon());// 设置用户的图标
 		render.setOpenIcon(OrgTreePlugin.getNolnopenicon());
 		render.setClosedIcon(OrgTreePlugin.getNolnCloseicon());
+		tree1.setCellRenderer(render);		
+		
+		tree1.addTreeExpansionListener(new TreeExpansionListener() {
+			
+			@Override
+			public void treeExpanded(TreeExpansionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void treeCollapsed(TreeExpansionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		// 排版
 		setLayout(new BorderLayout());
 		panel = new JPanel();
@@ -104,12 +129,14 @@ public class OrgTree extends JPanel implements TreeModelListener,
 	public void treeStructureChanged(TreeModelEvent e) {
 	}
 
+	//鼠标点击事件
 	class MouseHandle extends MouseAdapter {
 		public void mousePressed(MouseEvent e) {
 			try {
 				if (e.getModifiers() == InputEvent.BUTTON3_MASK) {
 					menu.show(tree1, e.getX(), e.getY());
 				}
+				
 			} catch (NullPointerException ne) {
 
 			}
@@ -129,6 +156,11 @@ public class OrgTree extends JPanel implements TreeModelListener,
 			OperateLinkMan operateLinkMan = new OperateLinkMan(e, itemAdd,
 					itemSendMess);
 			operateLinkMan.search(eMail);
+			// System.out.println(operateLinkMan.getJID());
+			// Presence presence = new Presence(Presence.Type.available);
+			// presence.setStatus("Gone fishing");
+			// System.out.println(presence.getFrom());
+			// ConnectionUtils.getConnection().sendPacket(presence);
 		} else {
 			JOptionPane.showMessageDialog(null, "树的路径为空！");
 		}
@@ -174,11 +206,13 @@ public class OrgTree extends JPanel implements TreeModelListener,
 			Document document = URIsaxReader.read(uriName);
 			List<? extends Node> list = document.selectNodes("//root/orgtree");
 			for (Node node : list) {
-				xmlURL=node.getText();
+				xmlURL = node.getText();
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return xmlURL;
 	}
+
+	
 }
