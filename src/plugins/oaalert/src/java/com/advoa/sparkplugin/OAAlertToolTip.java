@@ -9,10 +9,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +28,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 public class OAAlertToolTip {
 
+	private AdvOAPreferences preferences;
     // 气泡提示宽
     private int _width = 220;
 
@@ -88,7 +93,7 @@ public class OAAlertToolTip {
         private static final long serialVersionUID = 1L;
 
         private JLabel _label = new JLabel();
-        
+        private JButton _button = new JButton("点击进入OA");
         private JTextArea _message = new JTextArea();
 
         public ToolTipSingle() {
@@ -97,14 +102,19 @@ public class OAAlertToolTip {
 
         private void initComponents() {
             setSize(_width, _height);
+            preferences = new AdvOAPreferences();
             _message.setFont(getMessageFont());
             ImagePanel externalPanel = new ImagePanel();
             externalPanel.setLayout(new GridBagLayout());            
 
             externalPanel.add(_message, new GridBagConstraints(1, 1, 2, 2, 1.0,
-    				1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
-    				new Insets(55, 35, 15, 15), 20, 40));
-
+					0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH,
+					new Insets(35, 10, 5, 5), 0, 0));
+            
+			externalPanel.add(_button, new GridBagConstraints(2, 3, 1, 2, 0.0,
+					0.0, GridBagConstraints.SOUTH, GridBagConstraints.NONE,
+					new Insets(5, 5, 5, 5), 0, 0));
+			_button.setVisible(preferences.getButtonCheck());
             _message.setBackground(_bgColor);
 
             _message.setLineWrap(true);
@@ -113,6 +123,29 @@ public class OAAlertToolTip {
             _message.setForeground(getMessageColor());
 
             getContentPane().add(externalPanel);
+            _button.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+
+					XmlUtil util = new XmlUtil();
+					String url = util.getRealURL(
+							util.getXMLText(
+									util.getList("//root/oaalert/servers/oaserver"),
+									preferences
+											.getServerSelection(),
+									preferences
+											.getLoginSelection()),
+							preferences);
+					try {
+						Runtime.getRuntime().exec(
+								"cmd /c start iexplore " + url);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
         }
 
         /**
