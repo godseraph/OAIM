@@ -29,7 +29,7 @@ public class OrgTreeCellRenderer extends DefaultTreeCellRenderer {
 	private String openfireIP = SparkManager.getConnection().getHost();;
 
 	private static final Icon nolIcon = new ImageIcon(OrgTreeCellRenderer.class
-			.getClassLoader().getResource("images/offline.png"));
+			.getClassLoader().getResource("images/off_line.png"));
 
 	private static final Icon onlineIcon = new ImageIcon(
 			OrgTreeCellRenderer.class.getClassLoader().getResource(
@@ -59,9 +59,12 @@ public class OrgTreeCellRenderer extends DefaultTreeCellRenderer {
 				selected, expanded, leaf, row, hasFocus);
 
 		// 得到每个节点的TreeNode
+		
+		//JiveTreeNode n = (JiveTreeNode)value;
+		//System.out.println(n.toString());
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
-		setClosedIcon(closeIcon);
-		setOpenIcon(openIcon);
+//		setClosedIcon(closeIcon);
+//		setOpenIcon(openIcon);
 
 		if (node.isRoot()) {
 			setIcon(openIcon);
@@ -73,12 +76,12 @@ public class OrgTreeCellRenderer extends DefaultTreeCellRenderer {
 			}
 			// setOpenIcon(onlineIcon);
 		}
-
+		//System.out.println(n.toString());
 		// 得到每个节点的text
 		String str = node.toString();
 
 		String strUrl = "http://"+openfireIP+":9090/plugins/presence/status?jid="
-				+ str + "@oaim&type=xml";
+				+ str + "@OAIM&type=xml";
 
 		if (node.isLeaf()) {
 			switch (IsUserOnLine(strUrl)) {

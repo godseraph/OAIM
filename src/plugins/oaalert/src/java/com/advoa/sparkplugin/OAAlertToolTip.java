@@ -42,7 +42,7 @@ public class OAAlertToolTip {
     private int _stepTime = 30;
 
     // 显示时间
-    private int _displayTime = 5000;
+    private int _displayTime = 20000;
 
     // 目前申请的气泡提示数量
     private int _countOfToolTip = 0;

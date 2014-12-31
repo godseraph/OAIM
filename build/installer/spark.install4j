@@ -14,7 +14,7 @@
     <variables>
       <variable name="VERSION_MAJOR" value="1" description="" category="" />
       <variable name="VERSION_MINOR" value="0" description="" category="" />
-      <variable name="VERSION_REVISION" value="8" description="" category="" />
+      <variable name="VERSION_REVISION" value="9" description="" category="" />
       <variable name="APP_NAME" value="OAIM" description="" category="" />
       <variable name="APP_SHORT_NAME" value="OAIM" description="" category="" />
       <variable name="PUBLISHER" value="Ignite Realtime" description="" category="" />

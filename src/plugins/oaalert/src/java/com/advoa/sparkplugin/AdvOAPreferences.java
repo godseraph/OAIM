@@ -82,8 +82,12 @@ public class AdvOAPreferences {
 	public void setPassword(String password) {
 		
 		Blowfish bf = new Blowfish("AudO6l0swyzXDnk");
-		if(!password.equals((props.getProperty("password"))))
+		if(password.equals("")){
+			props.setProperty("password", "");
+		}
+		if(!password.equals((props.getProperty("password")))){
 				props.setProperty("password", bf.encrypt(password));
+		}
 	}
 
 	public String getPassword() {

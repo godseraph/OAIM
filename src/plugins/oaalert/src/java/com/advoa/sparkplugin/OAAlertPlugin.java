@@ -3,26 +3,33 @@ package com.advoa.sparkplugin;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.Timer;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
 
+import org.dom4j.Document;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 import org.jivesoftware.MainWindow;
 import org.jivesoftware.spark.SparkManager;
 import org.jivesoftware.spark.plugin.Plugin;
 
-public class OAAlertPlugin implements Plugin {
+public class OAAlertPlugin implements Plugin{
 
 	private int alerttimer;
 	private AdvOAPreference preference;
-	
-	private Timer timer = new Timer();
+	private AdvOAPreferences preferences;
+	private ScheduledThreadPoolExecutor timer = new ScheduledThreadPoolExecutor(5);
+	//private Timer timer = new Timer();
 	private OAAlertTask task = OAAlertTask.getInstance(this);
 	private XmlUtil util;
 
 	public void initialize() {
 		util = new XmlUtil();
 		final MainWindow mainWindow = SparkManager.getMainWindow();
+		preferences = new AdvOAPreferences();
 
 		JMenuItem oaMenu = new JMenuItem("OAµÇÂ¼");
 		mainWindow.getJMenuBar().getMenu(0).add(oaMenu, 0);
@@ -33,7 +40,7 @@ public class OAAlertPlugin implements Plugin {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				AdvOAPreferences preferences = new AdvOAPreferences();
+
 				try {
 					Runtime.getRuntime()
 							.exec("cmd /c start iexplore "
@@ -76,7 +83,6 @@ public class OAAlertPlugin implements Plugin {
 
 	public void getIni() {
 		try {
-			AdvOAPreferences preferences = new AdvOAPreferences();
 			alerttimer = Integer.parseInt(util.getTime(
 					util.getList("//root/oaalert/servers/oaserver"),
 					preferences.getServerSelection(), "timer"));
@@ -88,9 +94,9 @@ public class OAAlertPlugin implements Plugin {
 	}
 
 	public void bubbleRun() {
-		try {
-			timer.schedule(task, 1000, 1000 * 6 * alerttimer);
-			//preferences.setStatus(true);
+		try {			
+			timer.scheduleWithFixedDelay(task, 1 , 60*alerttimer , TimeUnit.SECONDS);
+			//preferences.setStatus(true);			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
