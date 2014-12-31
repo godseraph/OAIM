@@ -58,7 +58,6 @@ public class OrgTreePlugin implements Plugin {
 
 	public void initialize() {
 		Workspace workspace = SparkManager.getWorkspace();
-
 		SparkTabbedPane tabbedPane = workspace.getWorkspacePane();
 
 		OrgTree orgTreePanel = new OrgTree();// »ú¹¹Ê÷

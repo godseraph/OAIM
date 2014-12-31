@@ -3,7 +3,7 @@ package com.advoa.orgtree;
 import javax.swing.tree.*;
 
 public class OrgTreeNode extends DefaultMutableTreeNode implements
-		java.io.Serializable {
+		java.io.Serializable{
 
 	private static final long serialVersionUID = -5358854185627562145L;
 	private String unitid;// 机构ID
@@ -12,6 +12,7 @@ public class OrgTreeNode extends DefaultMutableTreeNode implements
 	private Boolean visited;// 是否已访问
 	private String type; // 类型
 	private String eMail; // 用户的邮箱
+	private String name;
 
 	public OrgTreeNode(String s, String eMail) {
 		super(s);
@@ -23,6 +24,9 @@ public class OrgTreeNode extends DefaultMutableTreeNode implements
 		this.eMail = null;
 	}
 
+//	public String getName(){
+////		super.get
+//	}
 	public String getUnitid() {
 		return unitid;
 	}
@@ -66,4 +70,5 @@ public class OrgTreeNode extends DefaultMutableTreeNode implements
 	public String geteMail() {
 		return eMail;
 	}
+
 }

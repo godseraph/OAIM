@@ -36,6 +36,7 @@ public class OperateLinkMan implements Searchable {
 	private MouseEvent Me;
 	private JMenuItem itemAdd = null;
 	private JMenuItem itemSendMess = null;
+	private String jid = null;
 
 	// 此构造是为了点击右键出现的菜单准备的
 	public OperateLinkMan(final ActionEvent e, JMenuItem itemAdd,
@@ -87,6 +88,7 @@ public class OperateLinkMan implements Searchable {
 			public void finished() {
 
 				Iterator<Row> rows = data.getRows();
+				jid = getJID(data);
 				if (rows.hasNext()) {
 					if (e.getSource() == itemAdd) {
 						addUsers(data);
@@ -101,6 +103,31 @@ public class OperateLinkMan implements Searchable {
 			}
 		};
 		worker.start();
+	}
+
+	public ReportedData getData(final String treeNodeEmail) {
+		if (searchServices == null) {
+			loadSearchServices();
+		}
+		if (searchServices == null) {
+			JOptionPane.showMessageDialog(null, "服务器为空！");
+		} else {
+			for (String searchService : searchServices)
+				serviceName = searchService;
+			try {
+				searchManager = new UserSearchManager(
+						SparkManager.getConnection());
+				searchForm = searchManager.getSearchForm(serviceName);
+				Form answerForm = searchForm.createAnswerForm();
+				answerForm.setAnswer("Email", true);
+				answerForm.setAnswer("search", treeNodeEmail);
+				data = searchManager.getSearchResults(answerForm, serviceName);
+			} catch (XMPPException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return data;
 	}
 
 	private void loadSearchServices() {
@@ -208,4 +235,13 @@ public class OperateLinkMan implements Searchable {
 		}
 	}
 
+	public String getJID(ReportedData data) {
+		Iterator<Row> rows = data.getRows();
+		String jid = null;
+		if (rows.hasNext()) {
+			Row row = rows.next();
+			jid = getFirstValue(row, "jid");
+		}
+		return jid;
+	}
 }
