@@ -67,17 +67,20 @@ public class OAAlertTask implements Runnable {
 				String xmlStr = get(userName, preferences.getPassword());
 				boolean mailalert = getXML(xmlStr, "mailalert").equals("True");
 				boolean gwalert = getXML(xmlStr, "gwalert").equals("True");
+
 				boolean soundSelectionInChatRoom = preferences
 						.getSoundSelectionInChatRoom();
-				if (mailalert && !gwalert) {
-					str = "  您有新邮件待阅！";
-					tip.setToolTip(str);
-				} else if (gwalert && !mailalert) {
-					str = "  您有新的公文待办！";
-					tip.setToolTip(str);
-				} else if (mailalert && gwalert) {
-					str = "  您有新邮件待阅！\n  您有新的公文待办！";
-					tip.setToolTip(str);
+				if (preferences.getBubbleSelection()) {
+					if (mailalert && !gwalert) {
+						str = "  您有新邮件待阅！";
+						tip.setToolTip(str);
+					} else if (gwalert && !mailalert) {
+						str = "  您有新的公文待办！";
+						tip.setToolTip(str);
+					} else if (mailalert && gwalert) {
+						str = "  您有新邮件待阅！\n  您有新的公文待办！";
+						tip.setToolTip(str);
+					}
 				}
 				if (soundSelectionInChatRoom) {
 					String gw_au = soundMap.get(preferences

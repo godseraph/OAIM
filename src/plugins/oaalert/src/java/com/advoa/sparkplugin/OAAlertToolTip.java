@@ -93,7 +93,7 @@ public class OAAlertToolTip {
         private static final long serialVersionUID = 1L;
 
         private JLabel _label = new JLabel();
-        private JButton _button = new JButton("点击进入OA");
+        private JButton _button = new JButton("点击进入系统");
         private JTextArea _message = new JTextArea();
 
         public ToolTipSingle() {
