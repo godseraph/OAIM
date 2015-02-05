@@ -1,7 +1,9 @@
 package com.advoa.sparkplugin;
 
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -16,13 +18,14 @@ import org.jivesoftware.MainWindow;
 import org.jivesoftware.spark.SparkManager;
 import org.jivesoftware.spark.plugin.Plugin;
 
-public class OAAlertPlugin implements Plugin{
+public class OAAlertPlugin implements Plugin {
 
 	private int alerttimer;
 	private AdvOAPreference preference;
 	private AdvOAPreferences preferences;
-	private ScheduledThreadPoolExecutor timer = new ScheduledThreadPoolExecutor(5);
-	//private Timer timer = new Timer();
+	private ScheduledThreadPoolExecutor timer = new ScheduledThreadPoolExecutor(
+			5);
+	// private Timer timer = new Timer();
 	private OAAlertTask task = OAAlertTask.getInstance(this);
 	private XmlUtil util;
 
@@ -40,23 +43,10 @@ public class OAAlertPlugin implements Plugin{
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-
-				try {
-					Runtime.getRuntime()
-							.exec("cmd /c start iexplore "
-									+ util.getRealURL(
-											util.getXMLText(
-													util.getList("//root/oaalert/servers/oaserver"),
-													preferences
-															.getServerSelection(),
-													preferences
-															.getLoginSelection()),
-											preferences));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				toOA(util.getRealURL(util.getXMLText(
+						util.getList("//root/oaalert/servers/oaserver"),
+						preferences.getServerSelection(),
+						preferences.getLoginSelection()), preferences));
 			}
 
 		});
@@ -65,6 +55,26 @@ public class OAAlertPlugin implements Plugin{
 
 		getIni();
 		bubbleRun();
+	}
+
+	public void toOA(String url) {
+		try {
+			Process ps = null;
+			Runtime rn = Runtime.getRuntime();
+			ps = rn.exec("reg query HKEY_CLASSES_ROOT\\Applications\\iexplore.exe\\shell\\open\\command");
+			ps.getOutputStream().close();
+			InputStreamReader i = new InputStreamReader(ps.getInputStream());
+			String line;
+			BufferedReader ir = new BufferedReader(i);
+			while ((line = ir.readLine()) != null) {
+				if (line.contains("\"")) {
+					String[] str = line.split("\"");
+					rn.exec(str[1] + " " + url);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -94,16 +104,17 @@ public class OAAlertPlugin implements Plugin{
 	}
 
 	public void bubbleRun() {
-		try {			
-			timer.scheduleWithFixedDelay(task, 1 , 60*alerttimer , TimeUnit.SECONDS);
-			//preferences.setStatus(true);			
+		try {
+			timer.scheduleWithFixedDelay(task, 1, 60 * alerttimer,
+					TimeUnit.SECONDS);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 
 	}
+
 	public static void main(String[] args) {
-		
+
 	}
 }
